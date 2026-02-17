@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  useWindowDimensions,
 } from "react-native";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -12,6 +13,7 @@ import * as React from "react";
 
 export default function Explore() {
   const router = useRouter();
+  const { width } = useWindowDimensions();
 
   const collections = [
     {
@@ -34,86 +36,103 @@ export default function Explore() {
     },
   ];
 
+  // Proper column system
+  const getColumns = () => {
+    if (width < 600) return 2;
+    if (width < 900) return 3;
+    if (width < 1300) return 4;
+    return 5;
+  };
+
+  const columns = getColumns();
+  const cardWidth = `${100 / columns - 2}%`;
+
   return (
     <View className="flex-1 bg-[#E9E7E3]">
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* HEADER */}
-        <View className="bg-white px-6 pt-14 pb-6">
-          <Text className="text-2xl font-bold text-gray-800">
-            Explore
-          </Text>
+        <View className="max-w-[1600px] w-full self-center">
 
-          <View className="mt-4 bg-gray-100 rounded-xl flex-row items-center px-4 py-3">
-            <Feather name="search" size={18} color="#6B7280" />
-            <TextInput
-              placeholder="Search trends..."
-              className="ml-3 flex-1"
-            />
-          </View>
-        </View>
+          {/* HEADER */}
+          <View className="bg-white px-6 pt-14 pb-6">
+            <Text className="text-2xl font-bold text-gray-800">
+              Explore
+            </Text>
 
-        {/* TRENDING COLLECTIONS */}
-        <View className="px-6 mt-8">
-          <Text className="text-lg font-semibold text-gray-800 pb-4">
-            Trending Collections
-          </Text>
-
-          {collections.map((item) => (
-            <TouchableOpacity
-              key={item.id}
-              className="bg-white rounded-2xl mb-6 overflow-hidden"
-            >
-              <Image
-                source={{ uri: item.image }}
-                className="h-48 w-full"
-                resizeMode="cover"
+            <View className="mt-4 bg-gray-100 rounded-xl flex-row items-center px-4 py-3">
+              <Feather name="search" size={18} color="#6B7280" />
+              <TextInput
+                placeholder="Search trends..."
+                className="ml-3 flex-1 border-0"
               />
+            </View>
+          </View>
 
-              <View className="absolute bottom-0 w-full bg-black/40 px-4 py-3">
-                <Text className="text-white text-lg font-semibold">
-                  {item.title}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
+          {/* TRENDING COLLECTIONS */}
+          <View className="px-6 mt-8">
+            <Text className="text-lg font-semibold text-gray-800 pb-4">
+              Trending Collections
+            </Text>
 
-        {/* RECOMMENDED SECTION */}
-        <View className="px-6 mt-4 pb-10">
-          <Text className="text-lg font-semibold text-gray-800 pb-4">
-            Recommended For You
-          </Text>
-
-          <View className="flex-row flex-wrap justify-between">
-            {[1, 2, 3, 4].map((item) => (
-              <View
-                key={item}
-                className="bg-white w-[48%] rounded-2xl mb-6 overflow-hidden"
+            {collections.map((item) => (
+              <TouchableOpacity
+                key={item.id}
+                className="bg-white rounded-2xl mb-6 overflow-hidden"
               >
                 <Image
-                  source={{
-                    uri: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=800",
-                  }}
-                  className="h-36 w-full"
+                  source={{ uri: item.image }}
+                  className="h-64 w-full"
+                  resizeMode="cover"
                 />
 
-                <View className="p-4">
-                  <Text className="text-gray-800 font-semibold">
-                    Trending Item
-                  </Text>
-
-                  <Text className="text-gray-500 pt-1">
-                    Limited Edition
+                <View className="absolute bottom-0 w-full bg-black/50 px-4 py-3">
+                  <Text className="text-white text-lg font-semibold">
+                    {item.title}
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
+
+          {/* RECOMMENDED SECTION */}
+          <View className="px-6 mt-6 pb-12">
+            <Text className="text-lg font-semibold text-gray-800 pb-4">
+              Recommended For You
+            </Text>
+
+            <View className="flex-row flex-wrap gap-4">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+                <View
+                  key={item}
+                  style={{ width: cardWidth }}
+                  className="bg-white rounded-2xl overflow-hidden"
+                >
+                  <Image
+                    source={{
+                      uri: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=800",
+                    }}
+                    className="h-48 w-full"
+                    resizeMode="cover"
+                  />
+
+                  <View className="p-4">
+                    <Text className="text-gray-800 font-semibold">
+                      Trending Item
+                    </Text>
+
+                    <Text className="text-gray-500 pt-1">
+                      Limited Edition
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          </View>
+
         </View>
       </ScrollView>
 
       {/* Bottom Navigation */}
-      <View className="h-20 bg-white flex-row justify-around items-center">
+      <View className="h-20 bg-white flex-row justify-around items-center border-t border-gray-200">
 
         <TouchableOpacity
           onPress={() => router.replace("/bottom_tabs/shop")}
