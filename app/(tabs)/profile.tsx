@@ -41,10 +41,8 @@ export default function App() {
       <View className="flex-1 bg-[#F5F5F5] rounded-t-3xl px-6 pt-6">
         <ScrollView showsVerticalScrollIndicator={false}>
 
-          {/* Same items as before... */}
-
           <View className="pb-4">
-            <TouchableOpacity className="bg-white rounded-2xl flex-row items-center justify-between px-5 py-4">
+            <TouchableOpacity onPress={() => router.push("/(tabs)/acinfo")} className="bg-white rounded-2xl flex-row items-center justify-between px-5 py-4">
               <View className="flex-row items-center">
                 <Feather name="user" size={20} color="#6B7280" />
                 <Text className="text-gray-700 text-base pl-4">Account</Text>
@@ -54,7 +52,7 @@ export default function App() {
           </View>
 
           <View className="pb-4">
-            <TouchableOpacity className="bg-white rounded-2xl flex-row items-center justify-between px-5 py-4">
+            <TouchableOpacity onPress={() => router.push("/(tabs)/notification")} className="bg-white rounded-2xl flex-row items-center justify-between px-5 py-4">
               <View className="flex-row items-center">
                 <Feather name="bell" size={20} color="#6B7280" />
                 <Text className="text-gray-700 text-base pl-4">Notifications</Text>
@@ -64,7 +62,7 @@ export default function App() {
           </View>
 
           <View className="pb-4">
-            <TouchableOpacity className="bg-white rounded-2xl flex-row items-center justify-between px-5 py-4">
+            <TouchableOpacity onPress={() => router.push("/(tabs)/password")} className="bg-white rounded-2xl flex-row items-center justify-between px-5 py-4">
               <View className="flex-row items-center">
                 <Feather name="lock" size={20} color="#6B7280" />
                 <Text className="text-gray-700 text-base pl-4">Password</Text>
@@ -74,7 +72,7 @@ export default function App() {
           </View>
 
           <View className="pb-4">
-            <TouchableOpacity className="bg-white rounded-2xl flex-row items-center justify-between px-5 py-4">
+            <TouchableOpacity onPress={() => router.push("/(tabs)/language")} className="bg-white rounded-2xl flex-row items-center justify-between px-5 py-4">
               <View className="flex-row items-center">
                 <Feather name="globe" size={20} color="#6B7280" />
                 <Text className="text-gray-700 text-base pl-4">Language</Text>
@@ -83,7 +81,7 @@ export default function App() {
             </TouchableOpacity>
           </View>
 
-          {/* 🔥 LOGOUT BUTTON */}
+          {/* LOGOUT BUTTON */}
           <View className="pb-8">
             <TouchableOpacity
               onPress={() => router.replace("/(auth)/login")}
@@ -105,27 +103,39 @@ export default function App() {
       {/* Bottom */}
       <View className="h-20 bg-white flex-row justify-around items-center">
 
-        <View className="items-center">
+        <TouchableOpacity
+          onPress={() => router.replace("/bottom_tabs/shop")}
+          className="items-center"
+        >
           <Ionicons name="flash-outline" size={22} color="#9CA3AF" />
           <Text className="text-xs pt-1 text-gray-400">Shop</Text>
-        </View>
+        </TouchableOpacity>
 
-        <View className="items-center">
+        <TouchableOpacity
+          onPress={() => router.replace("/bottom_tabs/explore")}
+          className="items-center"
+        >
           <Ionicons name="eye-outline" size={22} color="#9CA3AF" />
           <Text className="text-xs pt-1 text-gray-400">Explore</Text>
-        </View>
+        </TouchableOpacity>
 
-        <View className="items-center">
+        <TouchableOpacity
+          onPress={() => router.replace("/bottom_tabs/brands")}
+          className="items-center"
+        >
           <Ionicons name="bookmark-outline" size={22} color="#9CA3AF" />
           <Text className="text-xs pt-1 text-gray-400">Brands</Text>
-        </View>
+        </TouchableOpacity>
 
-        <View className="items-center">
+        <TouchableOpacity
+            onPress={() => router.replace("/(tabs)/profile")}
+          className="items-center"
+        >
           <Ionicons name="person" size={22} color="#111827" />
           <Text className="text-xs pt-1 text-gray-900 font-semibold">
             Profile
           </Text>
-        </View>
+        </TouchableOpacity>
 
       </View>
 
