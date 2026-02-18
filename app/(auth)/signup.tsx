@@ -13,11 +13,11 @@ export default function Signup() {
   const [password, setPassword] = useState("");
 
   const handleSignup = () => {
-    if (!first || !last || !email || !password) {
+    if (!first || !last || !email) {
       Alert.alert("Error", "Please fill all fields");
       return;
     }
-    router.replace("/(tabs)/profile");
+    router.replace("/bottom_tabs/profile");
   };
 
   return (

@@ -8,6 +8,7 @@ import {
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import * as React from "react";
+import BottomBar from "@/components/BottomBar";
 
 export default function Brands() {
   const router = useRouter();
@@ -123,43 +124,8 @@ export default function Brands() {
       </ScrollView>
 
       {/* Bottom Navigation */}
-      <View className="h-20 bg-white flex-row justify-around items-center">
-
-        <TouchableOpacity
-          onPress={() => router.replace("/bottom_tabs/shop")}
-          className="items-center"
-        >
-          <Ionicons name="flash-outline" size={22} color="#9CA3AF" />
-          <Text className="text-xs pt-1 text-gray-400">Shop</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => router.replace("/bottom_tabs/explore")}
-          className="items-center"
-        >
-          <Ionicons name="eye-outline" size={22} color="#9CA3AF" />
-          <Text className="text-xs pt-1 text-gray-400">Explore</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => router.replace("/bottom_tabs/brands")}
-          className="items-center"
-        >
-          <Ionicons name="bookmark" size={22} color="#111827" />
-          <Text className="text-xs pt-1 text-gray-900 font-semibold">
-            Brands
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => router.replace("/(tabs)/profile")}
-          className="items-center"
-        >
-          <Ionicons name="person-outline" size={22} color="#9CA3AF" />
-          <Text className="text-xs pt-1 text-gray-400">Profile</Text>
-        </TouchableOpacity>
-
-      </View>
+     <BottomBar />
+ 
     </View>
   );
 }

@@ -17,7 +17,7 @@ export default function Login() {
       return;
     }
 
-    router.replace("/(tabs)/profile");
+    router.replace("/bottom_tabs/profile");
   };
 
   return (
